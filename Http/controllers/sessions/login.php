@@ -27,7 +27,7 @@ if(!empty($errors)){
     exit;
 }
 
-login($email);
+login($email,$user['role']);
 if($user['role']=='owner'){
 header("location:/control_panel");
 }

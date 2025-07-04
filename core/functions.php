@@ -40,10 +40,11 @@ function abort($code=404){
     die();
 }
 
-function login($email){
+function login($email,$role){
      $_SESSION['user']=[
         'email'=>$email
     ];
+    $_SESSION['role']=$role;
     session_regenerate_id(true);
 }
 
