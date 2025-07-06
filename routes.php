@@ -10,5 +10,5 @@ $router->post('/logout', 'sessions/logout.php');
 $router->post('/info', 'cars/info.php')->only('Owner');
 $router->delete('/delete', 'cars/delete.php')->only('Owner');
 $router->get('/add', 'cars/add.php')->only('Owner');
-$router->post('/store', 'cars/store.php')->only('Owner');
+$router->put('/store', 'cars/store.php')->only('Owner');
 $router->put('/update', 'cars/update.php')->only('Owner');

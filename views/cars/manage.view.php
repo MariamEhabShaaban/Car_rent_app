@@ -34,7 +34,7 @@ require view('partials/nav.php');
       
       </div>
         <?php endif; ?>
-      <?php unset($_SESSION['add'], $_SESSION['delete']); ?>
+      <?php unset($_SESSION['add'], $_SESSION['delete'],$_SESSION['update']); ?>
     
     <h2 class="text-xl font-semibold text-gray-800">Your Cars</h2>
 
