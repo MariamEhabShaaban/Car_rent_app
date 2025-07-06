@@ -1,5 +1,5 @@
 <?php
-
+// owner
 $router->get('/', 'welcome.php');
 $router->get('/control_panel', 'control_panel.php')->only('Owner');
 $router->get('/cars', 'control_panel.php')->only('Owner');
@@ -12,3 +12,7 @@ $router->delete('/delete', 'cars/delete.php')->only('Owner');
 $router->get('/add', 'cars/add.php')->only('Owner');
 $router->put('/store', 'cars/store.php')->only('Owner');
 $router->put('/update', 'cars/update.php')->only('Owner');
+$router->get('/login', 'welcome.php');
+// customer
+
+$router->get('/signup', 'customers/signup.php');
