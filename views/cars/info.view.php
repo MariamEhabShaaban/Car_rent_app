@@ -1,10 +1,14 @@
-<?php require view('partials/header.php')?>
+<?php
+require view("partials/header.php");
+require view('partials/nav.php');
+?>
+
 <body class="bg-gray-300 text-gray-800">
 
   <div class="max-w-6xl mx-auto px-4 py-10">
     <!-- Back Button -->
-    <a href="/control_panel" class="text-blue-600 hover:underline mb-4 inline-block">&larr; Back </a>
-
+       <a href="javascript:history.back()" class="text-blue-600 hover:underline mb-4 inline-block">&larr; Back</a>
+       
     <!-- Car Detail Card -->
     <div class="bg-white shadow rounded-lg overflow-hidden md:flex">
       

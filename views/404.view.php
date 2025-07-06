@@ -42,7 +42,7 @@
             <div class="mt-12 text-center text-sm text-gray-500">
                 <p>© 2025 Your Company. All rights reserved.</p>
                 <p class="mt-1">
-                    <a href="/" class="hover:text-indigo-600 transition-smooth"><--Back Home</a> · 
+                       <a href="javascript:history.back()" class="text-blue-600 hover:underline mb-4 inline-block">&larr; Back</a>
                   
                 </p>
             </div>

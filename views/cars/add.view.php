@@ -1,5 +1,4 @@
 <?php
-
 require view("partials/header.php");
 require view('partials/nav.php');
 ?>
@@ -13,25 +12,23 @@ require view('partials/nav.php');
 
         <!-- Card Form -->
         <div class="bg-white shadow-md rounded-lg p-8">
-            <h2 class="text-2xl font-bold mb-6">Update Car</h2>
+            <h2 class="text-2xl font-bold mb-6">Add New Car</h2>
 
-            <form action="/update" method="POST" enctype="multipart/form-data" class="space-y-6">
-                <input type="hidden"  name="_method" value="PUT">
-                <input type="hidden" name="id" value="<?= $car['id']?>">
+            <form action="/store" method="POST" enctype="multipart/form-data" class="space-y-6">
                 <!-- Car Name -->
                 <div>
                     <label for="car_name" class="block font-semibold mb-1">Car Name</label>
                     <input type="text" name="car" id="car_name"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-gray-400"
-                        value="<?= $car['model_name']?>">
+                        >
                 </div>
 
                 <!-- Price -->
                 <div>
                     <label for="price" class="block font-semibold mb-1">Price/Day ($)</label>
-                    <input type="number" name="price" id="price" 
+                    <input type="number" name="price" id="price" min="1"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-gray-400"
-                         value="<?= $car['price']?>">
+                        >
                 </div>
 
                 <!-- Car Image -->
@@ -41,12 +38,12 @@ require view('partials/nav.php');
                         class="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring focus:ring-gray-400">
                 </div>
 
-   
+
                 <!-- Submit Button -->
                 <div>
                     <button type="submit"
                         class="bg-gray-700 hover:bg-gray-800 text-white px-6 py-2 rounded-md transition">
-                        Update Car
+                        Add Car
                     </button>
                 </div>
             </form>
