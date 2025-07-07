@@ -16,3 +16,4 @@ $router->get('/login', 'welcome.php');
 // customer
 
 $router->get('/signup', 'customers/signup.php');
+$router->post('/register', 'customers/register.php');

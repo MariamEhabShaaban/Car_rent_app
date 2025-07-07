@@ -8,18 +8,31 @@
 
       <div>
         <label for="email" class="block font-semibold mb-1">Email Address</label>
-        <input type="email" name="email" id="email" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500">
+        <input type="text" name="email" id="email" 
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500">
       </div>
+      <?php if (isset($errors['email'])): ?>
+        <p class="text-red-500 text-xs">
+          <?= $errors['email'] ?>
+        </p>
+      <?php endif ?>
 
       <div>
         <label for="password" class="block font-semibold mb-1">Password</label>
-        <input type="password" name="password" id="password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500">
+        <input type="password" name="password" id="password" 
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500">
       </div>
 
       <div>
         <label for="confirm_password" class="block font-semibold mb-1">Confirm Password</label>
-        <input type="password" name="confirm_password" id="confirm_password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500">
+        <input type="password" name="confirm_password" id="confirm_password" 
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500">
       </div>
+      <?php if (isset($errors['password'])): ?>
+        <p class="text-red-500 text-xs">
+          <?= $errors['password'] ?>
+        </p>
+      <?php endif ?>
 
       <button type="submit" class="w-full bg-gray-700 hover:bg-gray-800 text-white py-2 rounded-lg font-semibold">
         Sign Up

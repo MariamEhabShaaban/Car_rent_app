@@ -2,6 +2,7 @@
 
 use Core\Response;
 use Core\Router;
+  use Core\App;
 function dd($data){
     echo '<pre>';
     var_dump($data);
@@ -53,4 +54,23 @@ function logout(){
     session_destroy();
     $params=session_get_cookie_params();
     setcookie("PHPSESSID","",time()-3600,$params['path'],$params['domain'],$params['secure'],$params['httponly']);
+}
+
+
+function Register($email,$password){
+  
+$db=App::container()->resolve(\Core\Database::class); 
+    session_start();
+
+   $register = $db->query('INSERT INTO users (`email` , `password`, `role`) VALUES (?,?,?) ',[ $email , $password,'customer' ]);
+    $_SESSION['register']='Registed Successfully'; 
+    return $register;
+}
+
+
+function unique ($email){
+    $db=App::container()->resolve(\Core\Database::class); 
+    $duplicate = $db->query('SELECT * FROM users WHERE email = ?',[$email])->find();
+    $_SESSION['register']='Registed Successfully'; 
+    return !$duplicate;
 }
