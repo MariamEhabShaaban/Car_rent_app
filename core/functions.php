@@ -2,75 +2,109 @@
 
 use Core\Response;
 use Core\Router;
-  use Core\App;
-function dd($data){
+use Core\App;
+function dd($data)
+{
     echo '<pre>';
     var_dump($data);
     echo '</pre>';
     die();
 }
 
-function uriIs($uri){
-    return $uri==$_SERVER['REQUEST_URI'];
+function uriIs($uri)
+{
+    return $uri == $_SERVER['REQUEST_URI'];
 }
 
-function authorize($condition,$status=Response::FORBIDDEN){
-    if(!$condition){
+function authorize($condition, $status = Response::FORBIDDEN)
+{
+    if (!$condition) {
         abort($status);
     }
 }
 
 
-function base_path($path){
-    
-    $PATH= BASE_PATH.$path;
+function base_path($path)
+{
+
+
+    $PATH = BASE_PATH . $path;
 
     return $PATH;
 }
 
 
-function view ($path,$attr=[]){
+function view($path, $attr = [])
+{
     extract($attr);
-    return base_path('views/'.$path);
+    return base_path('views/' . $path);
 }
 
 
-function abort($code=404){
+function abort($code = 404)
+{
     http_response_code($code);
     require base_path("controllers/{$code}.php");
     die();
 }
 
-function login($email,$role){
-     $_SESSION['user']=[
-        'email'=>$email
-    ];
-    $_SESSION['role']=$role;
-    session_regenerate_id(true);
+
+function redirect($path)
+{
+
+    header('location:' . $path);
+
+    exit;
+
 }
 
-function logout(){
-    $_SESSION=[];
-    session_destroy();
-    $params=session_get_cookie_params();
-    setcookie("PHPSESSID","",time()-3600,$params['path'],$params['domain'],$params['secure'],$params['httponly']);
+function upload_image($image, $tmp_name, $carId, $uploadDir)
+{
+
+
+    $image_name = $image;
+    $ext = extension($image_name);
+
+    $image_name = $carId . '.' . $ext;
+
+    $source_path = $tmp_name;
+
+    $dest_path = base_path('public/uploads/' . $uploadDir . '/' . $image_name);
+
+
+    $upload = move_uploaded_file($source_path, $dest_path);
+
+    return $upload;
+
+
+}
+
+function explodeImage($image_name)
+{
+    $explode_img = explode('.', $image_name);
+    return $explode_img;
+}
+
+function extension($image_name)
+{
+
+    $ext = explodeImage($image_name)[1];
+    return $ext;
+}
+
+function image($id, $ext)
+{
+    $image = $id . '.' . $ext;
+    return $image;
 }
 
 
-function Register($email,$password){
-  
-$db=App::container()->resolve(\Core\Database::class); 
-    session_start();
-
-   $register = $db->query('INSERT INTO users (`email` , `password`, `role`) VALUES (?,?,?) ',[ $email , $password,'customer' ]);
-    $_SESSION['register']='Registed Successfully'; 
-    return $register;
+function remove_image($id, $ext, $removeDir)
+{
+    $image_name = $id . '.' . $ext;
+    $path = base_path('public/uploads/' . $removeDir . '/' . $image_name);
+    $remove = unlink($path);
+    return $remove;
 }
 
 
-function unique ($email){
-    $db=App::container()->resolve(\Core\Database::class); 
-    $duplicate = $db->query('SELECT * FROM users WHERE email = ?',[$email])->find();
-    $_SESSION['register']='Registed Successfully'; 
-    return !$duplicate;
-}

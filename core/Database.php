@@ -41,4 +41,11 @@ class Database{
     public function getAll(){
         return $this->st->fetchAll(PDO::FETCH_ASSOC);
     }
+
+public function lastInsertId()
+{
+    return $this->conn->lastInsertId();
 }
+}
+
+

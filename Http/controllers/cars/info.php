@@ -4,12 +4,15 @@ use Core\App;
 
 $db=App::container()->resolve(\Core\Database::class);
 
-$id= $_POST['car'];
+$id= $_POST['car']??$_GET['car'];
+
 
 $car = $db->query('SELECT * FROM cars WHERE id= ?',[$id])->find();
 
 
 if($car){
+    $car['image']= image($car['id'],$car['image_ext']);
+  
 
     require view("cars/info.view.php",[
         'car'=>$car
@@ -17,5 +20,5 @@ if($car){
     exit;
 }
 
-header("location:/control_panel");
+redirect("/control_panel");
 

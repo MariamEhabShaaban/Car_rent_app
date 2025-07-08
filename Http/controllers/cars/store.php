@@ -3,27 +3,39 @@
 use Core\App;
 use Core\validator;
 
-$db=App::container()->resolve(\Core\Database::class);
+$db = App::container()->resolve(\Core\Database::class);
 
-$_SESSION['add']="Failed To Add";
+$_SESSION['add'] = "Failed To Add";
 
-$car= $_POST['car'];
+$car = $_POST['car'];
 
-$price= $_POST['price'];
+$price = $_POST['price'];
 
-if(validator::string($car,1) && validator::string($price,2)){
+$image = $_FILES['image']['name'];
 
-$status= 'Available';
+$tmp_name = $_FILES['image']['tmp_name'];
 
-$store_car = $db->query('INSERT INTO cars (`model_name`,`price`,`status`) VALUES (?,?,?)',[$car, $price ,$status]);
+$uploadDir = 'cars';
 
-if($store_car){
-    $_SESSION['add']="Added Successfully";
-   
+
+if (validator::string($car, 1) && validator::string($price, 2)) {
+
+    $status = 'Available';
+
+    $store_car = $db->query('INSERT INTO cars (`model_name`,`price`,`status`) VALUES (?,?,?)', [$car, $price, $status]);
+
+    if ($store_car) {
+        $carId = $db->lastInsertId();
+        $ext = extension($image);
+        upload_image($image, $tmp_name, $carId, $uploadDir);
+        $store_car = $db->query('UPDATE cars SET image_ext =? WHERE id= ?', [$ext, $carId]);
+
+        $_SESSION['add'] = "Added Successfully";
+
+    }
 }
-}
 
- header('location:/manage');
+redirect('/manage');
 
 
 

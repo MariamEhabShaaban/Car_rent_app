@@ -2,6 +2,7 @@
 
 use Core\App;
 
+use Core\Authenticator;
 use Core\validator;
 
 $db = App::container()->resolve(\Core\Database::class);
@@ -14,39 +15,16 @@ $password = $_POST['password'];
 
 $errors = [];
 
-// empty validation
+$auth = new Authenticator();
 
-if (!validator::string($email)) {
+$login = $auth->attemptLogin($email, $password);
 
-    $errors['email'] = 'Please This Field is required';
-
-} else {
-
-    if (!validator::string($password, 8)) {
-
-        $errors['password'] = 'Password must be more than 7 characters';
-
-    } else {
-
-        $user = $db->query("SELECT * FROM users WHERE email = ?", [$email])->find();
-
-        if ($user) {
-
-            if (!password_verify($password, $user['password'])) {
-
-                $errors['password'] = 'Incorrect password';
-            }
-
-        } else {
-
-            $errors['email'] = 'This email is not found';
-
-        }
-
-    }
+if ($login) {
+    $auth->login($email);
 }
 
 
+$errors = $auth->error();
 
 if (!empty($errors)) {
 
@@ -59,15 +37,13 @@ if (!empty($errors)) {
     exit;
 }
 
-login($email, $user['role']);
 
-if ($user['role'] == 'owner') {
+if ($_SESSION['role'] == 'owner') {
 
-    header("location:/control_panel");
-    exit;
+    redirect("/control_panel");
     
-}
-else if($user['role']=='customer'){
-     header("location:/home");
-     exit;
+
+} else if ($_SESSION['role'] == 'customer') {
+    redirect("/home");
+
 }

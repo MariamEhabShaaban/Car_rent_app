@@ -16,17 +16,9 @@ require view('partials/nav.php');
         <?= $_SESSION['delete'] ?>
         </div>
          <?php endif; ?>
-         <?php if (isset($_SESSION['update'])): ?>
-      <div class="mb-5 px-4 py-3 rounded border 
-              <?php echo $_SESSION['update'] === 'Updated Successfully'
-                ? 'bg-green-100 text-green-800 border-green-300'
-                : 'bg-red-100 text-red-800 border-red-300'; ?>">
-        <?= $_SESSION['update'] ?>
-        </div>
-         <?php endif; ?>
-
+        
          <?php if (isset($_SESSION['add'])): ?>
-      <div class="mb-5 px-4 py-3 rounded border 
+      <div class="text-center mb-5 px-4 py-3 rounded border 
               <?php echo $_SESSION['add'] === 'Added Successfully'
                 ? 'bg-green-100 text-green-800 border-green-300'
                 : 'bg-red-100 text-red-800 border-red-300'; ?>">
@@ -34,6 +26,15 @@ require view('partials/nav.php');
       
       </div>
         <?php endif; ?>
+        <?php if (isset($_SESSION['update'])): ?>
+      <div class="text-center mb-5 px-4 py-3 rounded border 
+              <?php echo $_SESSION['update'] === 'Updated Successfully'
+                ? 'bg-green-100 text-green-800 border-green-300'
+                : 'bg-red-100 text-red-800 border-red-300'; ?>">
+        <?= $_SESSION['update'] ?>
+        </div>
+         <?php endif; 
+         ?> 
       <?php unset($_SESSION['add'], $_SESSION['delete'],$_SESSION['update']); ?>
     
     <h2 class="text-xl font-semibold text-gray-800">Your Cars</h2>

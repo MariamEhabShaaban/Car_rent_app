@@ -35,7 +35,7 @@ require view('partials/nav.php');
                 <!-- Car Image -->
                 <div>
                     <label for="photo" class="block font-semibold mb-1">Car Image</label>
-                    <input type="file" name="photo" id="photo" accept="image/*"
+                    <input type="file" name="image" id="photo" accept="image/*"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring focus:ring-gray-400">
                 </div>
 

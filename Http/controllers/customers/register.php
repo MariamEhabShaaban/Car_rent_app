@@ -1,73 +1,30 @@
 <?php
 
+use Core\Authenticator;
 use Core\validator;
+session_start();
 
-
-$errors=[];
-$register=true;
+$errors = [];
+$register = true;
 
 $email = $_POST['email'];
 
-$password =password_hash($_POST['password'],PASSWORD_DEFAULT);
+$password = $_POST['password'];
 
-$confirm_pass= $_POST['confirm_password'];
-// form validation 
+$confirm_pass = $_POST['confirm_password'];
 
-if(!validator::string($email)){
+$auth = new Authenticator();
 
-     $errors['email']='Please This Field is required';
-}
-else{
+$auth->validate($email, $password);
 
-    if(!validator::string($password,8)){
+$auth->confirm_password($confirm_pass);
 
-    $errors['password']='Password must be more than 7 characters';
-
-    } else {
-        // valid & unique email 
-
-        if(validator::email($email) && unique($email)){
+$errors = $auth->error();
 
 
-            
+if (!empty($errors)) {
 
-    // password confirm
-
-    if(!password_verify($password,$confirm_pass) && empty($errors)){
-
-        $errors['password']='Not match password';
-
-    }
-    else{
-
-        // register successfully
-          $register = Register($email, $password);
-       
-
-    }
-
-}
-    
-else{
-
-    $errors['email']='Enter valid Email';
-
-}
-
-
-    }
-}
-
-
-
-// email validation
-
-
-
-
-if(!empty($errors)){
-
-    require view('signup.view.php',[
+    require view('signup.view.php', [
 
         'errors' => $errors
 
@@ -76,31 +33,12 @@ if(!empty($errors)){
     exit;
 }
 
+$register = $auth->register();
 
-if(!$register){
+if (!$register) {
 
- $_SESSION['register']='Failed To Register'; 
+    $_SESSION['register'] = 'Failed To Register';
 
 }
 
-header('location:/login');
-
-
-
-
-
-
-
-
-
-
-
-
-// store in database
-
-
-
-// redirect to login page if register success
-
-
-// if not return to sign up with errors
+redirect('/login');
