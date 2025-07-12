@@ -1,14 +1,11 @@
 <?php
 
 // validate date empty and in the future
-
-
-
-session_start();
-use Core\App;
 use Core\validator;
+use Models\Booking_requests_model;
+$request = new Booking_requests_model;
 
-$db = App::container()->resolve(\Core\Database::class);
+;
 
 $errors=[];
 
@@ -26,9 +23,7 @@ if (validator::string($time, 6) && validate_date($time)) {
 
 // update in database
 
-        $store_date = $db->query('UPDATE booking_requests SET date =? WHERE id= ?', [$time,
-         $Id]);
-
+        $store_date = $request->set_date( $time,$Id);
     }
 
 else{
@@ -47,4 +42,3 @@ redirect("/payment_method");
 
 
 
-// send an email to owner to confirm and this link will deleted after 5 hours

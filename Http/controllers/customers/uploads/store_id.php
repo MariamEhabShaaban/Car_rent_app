@@ -1,9 +1,10 @@
 <?php
 
-use Core\App;
+use Models\Booking_requests_model;
 use Core\validator;
 
-$db = App::container()->resolve(\Core\Database::class);
+$request = new Booking_requests_model;
+
 
 $errors = [];
 
@@ -26,10 +27,9 @@ if (validator::string($id_front, 1) && validator::string($id_back, 1)) {
 
     $status = 'pending';
     $customer_id = $_SESSION['id'];
-    $store_id = $db->query('INSERT INTO booking_requests (`customer_id`,`car_id`) VALUES (?,?)', [$customer_id, $car_id]);
-
+    $store_id = $request->add_request($customer_id,$car_id,$status);
     if ($store_id) {
-        $Id=$_SESSION['booking_id']= $db->lastInsertId();
+        $Id=$_SESSION['booking_id']= $store_id;
 
         $ext_front = extension($id_front);
 
@@ -39,11 +39,7 @@ if (validator::string($id_front, 1) && validator::string($id_back, 1)) {
 
         upload_image($id_back, $tmp_name_back, $Id, $uploadDir . '/back');
 
-        $store_id = $db->query('UPDATE booking_requests SET id_front =?, id_back=? WHERE id= ?', [
-            $ext_front,
-            $ext_back,
-            $Id
-        ]);
+        $store_id = $request->upload_id( $ext_front,$ext_back,$Id);
 
     }
 } else {

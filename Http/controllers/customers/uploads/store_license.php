@@ -1,9 +1,11 @@
 <?php
-session_start();
-use Core\App;
+
+use Models\Booking_requests_model;
 use Core\validator;
 
-$db = App::container()->resolve(\Core\Database::class);
+$request =new Booking_requests_model;
+
+
 
 $errors=[];
 
@@ -27,8 +29,7 @@ if (validator::string($license, 1)) {
 
         upload_image($license, $tmp_name_license, $Id, $uploadDir);
 
-        $store_license = $db->query('UPDATE booking_requests SET license =? WHERE id= ?', [$ext_license,
-         $Id]);
+        $store_license = $request->upload_license($ext_license,$Id);
 
     }
 

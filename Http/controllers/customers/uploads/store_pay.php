@@ -1,10 +1,10 @@
 <?php
 
 // store payment method
-use Core\App;
-use Core\validator;
 
-$db = App::container()->resolve(\Core\Database::class);
+use Core\validator;
+use Models\Booking_requests_model;
+$request = new Booking_requests_model;
 $errors = [];
 
 
@@ -16,7 +16,7 @@ if (validator::string($pay_method, 8)) {
     // update in data base
     $Id = $_SESSION['booking_id'];
 
-      $store_pay = $db->query('UPDATE booking_requests SET payment_method =? WHERE id=?', [$pay_method,$Id]);
+      $store_pay = $request->payment_method($pay_method,$Id);
 
     if ($store_pay) {
         // go to home 

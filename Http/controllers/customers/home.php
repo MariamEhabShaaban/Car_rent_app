@@ -1,11 +1,10 @@
 <?php
 
-use Core\App;
-
-$db = App::container()->resolve(\Core\Database::class);
+use Models\Cars_model;
+$car = new Cars_model;
 
 // get all cars
-$cars = $db->query('SELECT * FROM cars')->getAll();
+$cars = $car->get_all_cars();
 
 require view('home.view.php', [
 

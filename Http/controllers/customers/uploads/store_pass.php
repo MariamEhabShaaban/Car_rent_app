@@ -1,9 +1,8 @@
 <?php
-session_start();
-use Core\App;
-use Core\validator;
 
-$db = App::container()->resolve(\Core\Database::class);
+use Core\validator;
+use Models\Booking_requests_model;
+$request = new Booking_requests_model;
 
 $errors=[];
 
@@ -28,8 +27,7 @@ if (validator::string($passport, 1)) {
 
         upload_image($passport, $tmp_name_pass, $Id, $uploadDir);
 
-        $store_pass = $db->query('UPDATE booking_requests SET passport =? WHERE id= ?', [$ext_pass,
-         $Id]);
+        $store_pass = $request->upload_passport( $ext_pass,$Id);
 
     }
 
