@@ -7,6 +7,8 @@
       <!-- Desktop Navigation -->
       <div class="hidden md:flex space-x-6">
         <form action="/logout" method="POST">
+          <span class="text-gray-600 mr-5 font-bold"><?php echo $_SESSION['user']['email']??''?></span>
+
           <button type="submit" class="text-gray-600 hover:text-red-600">Logout</button>
         </form>
       </div>

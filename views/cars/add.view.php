@@ -15,7 +15,7 @@ require view('partials/nav.php');
             <h2 class="text-2xl font-bold mb-6">Add New Car</h2>
 
             <form action="/store" method="POST" enctype="multipart/form-data" class="space-y-6">
-                 <input type="hidden"  name="_method" value="PUT">
+               
                 <!-- Car Name -->
                 <div>
                     <label for="car_name" class="block font-semibold mb-1">Car Name</label>
