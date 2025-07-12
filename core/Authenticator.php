@@ -4,6 +4,7 @@ namespace Core;
 use Core\App;
 use Core\validator;
 use Models\Users_model;
+
 class Authenticator
 {
     protected $errors = [];
@@ -61,9 +62,9 @@ class Authenticator
     public function attemptLogin($email, $password): bool
     {
        $db = App::container()->resolve(\Core\Database::class);
+            $users = new Users_model;
 
-
-        $user = $db->query('SELECT * FROM users WHERE email = ?', [$email])->find();
+        $user = $users->get_user_byEmail($email);
 
 
         if (!$user) {
@@ -116,7 +117,8 @@ class Authenticator
     public function unique($email)
     {
         $db = App::container()->resolve(\Core\Database::class);
-        $duplicate = $db->query('SELECT * FROM users WHERE email = ?', [$email])->find();
+        $users = new Users_model;
+        $duplicate = $users->get_user_byEmail($email);
         return !$duplicate;
     }
 
