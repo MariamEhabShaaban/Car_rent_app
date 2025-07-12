@@ -14,4 +14,17 @@ class Users_model{
                return $res;
     }
 
+
+    public function get_user_byEmail($email){
+
+         $db = App::container()->resolve(\Core\Database::class);
+         $user = $db->query('SELECT * FROM users WHERE email = ?', [$email])->find();
+
+         return $user;
+
+    }
+
+
+
+  
 }
