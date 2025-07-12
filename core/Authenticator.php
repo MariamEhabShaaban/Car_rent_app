@@ -1,8 +1,9 @@
 <?php
 
 namespace Core;
-
-use Core\Database;
+use Core\App;
+use Core\validator;
+use Models\Users_model;
 class Authenticator
 {
     protected $errors = [];
@@ -59,7 +60,8 @@ class Authenticator
 
     public function attemptLogin($email, $password): bool
     {
-        $db = App::container()->resolve(\Core\Database::class);
+       $db = App::container()->resolve(\Core\Database::class);
+
 
         $user = $db->query('SELECT * FROM users WHERE email = ?', [$email])->find();
 
@@ -75,6 +77,7 @@ class Authenticator
             return false;
         }
         $this->role = $user['role'];
+        $_SESSION['id']=$user['id'];
 
         return true;
     }
@@ -101,11 +104,11 @@ class Authenticator
     public function register()
     {
 
-        $db = App::container()->resolve(\Core\Database::class);
-
-
-        $this->reg = $db->query('INSERT INTO users (`email` , `password`, `role`) VALUES (?,?,?) ', [$this->email, $this->password, $this->role]);
-        $_SESSION['register'] = 'Registed Successfully';
+          $add_user = new Users_model();
+          $this->reg = $add_user->add_user($this->email,$this->password,$this->role);
+        
+           if($this->reg)
+                 $_SESSION['register'] = 'Registed Successfully';
         return $this->reg;
     }
 

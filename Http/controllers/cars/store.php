@@ -1,9 +1,11 @@
 <?php
 
-use Core\App;
-use Core\validator;
 
-$db = App::container()->resolve(\Core\Database::class);
+use Core\validator;
+use Models\Cars_model;
+$add_car= new Cars_model();
+
+
 
 $_SESSION['add'] = "Failed To Add";
 
@@ -22,15 +24,15 @@ if (validator::string($car, 1) && validator::string($price, 2)) {
 
     $status = 'Available';
 
-    $store_car = $db->query('INSERT INTO cars (`model_name`,`price`,`status`) VALUES (?,?,?)', [$car, $price, $status]);
+    $store_car = $add_car->add_car($car,$price,$status);
 
     if ($store_car) {
-        $carId = $db->lastInsertId();
+        $carId = $store_car;
         $ext = extension($image);
         upload_image($image, $tmp_name, $carId, $uploadDir);
-        $store_car = $db->query('UPDATE cars SET image_ext =? WHERE id= ?', [$ext, $carId]);
-
-        $_SESSION['add'] = "Added Successfully";
+        $store_car = $add_car->store_image($ext,$carId);
+        if($store_car)
+          $_SESSION['add'] = "Added Successfully";
 
     }
 }

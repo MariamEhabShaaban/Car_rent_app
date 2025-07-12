@@ -1,11 +1,9 @@
 <?php
 
-use Core\App;
-
+//login 
 use Core\Authenticator;
 use Core\validator;
 
-$db = App::container()->resolve(\Core\Database::class);
 // validation 
 
 // if email is found and the password is correct
@@ -26,6 +24,8 @@ if ($login) {
 
 $errors = $auth->error();
 
+
+
 if (!empty($errors)) {
 
     require view('welcome.view.php', [
@@ -44,6 +44,9 @@ if ($_SESSION['role'] == 'owner') {
     
 
 } else if ($_SESSION['role'] == 'customer') {
+   
+   
     redirect("/home");
+
 
 }

@@ -2,10 +2,12 @@
 namespace Core;
 use PDO;
 use Core\Router;
+
 class Database{
     public $conn;
     public $st;
     public function __construct($config,$username='root',$password=''){
+        
        
         $dsn="mysql:".http_build_query($config,'',';');
 

@@ -108,3 +108,12 @@ function remove_image($id, $ext, $removeDir)
 }
 
 
+function validate_date($date) {
+ 
+   $input_date = new DateTime($date);
+   $input_date = $input_date->format('Y-m-d'); 
+    $current_date = date('Y-m-d');
+
+    return $input_date > $current_date;
+}
+

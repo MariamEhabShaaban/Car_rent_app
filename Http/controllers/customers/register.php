@@ -2,7 +2,7 @@
 
 use Core\Authenticator;
 use Core\validator;
-session_start();
+
 
 $errors = [];
 $register = true;

@@ -1,13 +1,13 @@
 <?php
 
+use Models\Cars_model;
+$car_ =new Cars_model;
 
-use Core\App;
 
-$db=App::container()->resolve(\Core\Database::class);
 
 $id= $_GET['car'];
 
-$car = $db->query('SELECT * FROM cars WHERE id= ?',[$id])->find();
+$car = $car_->get_car($id);
 
 if(!empty($car)){
     

@@ -1,12 +1,11 @@
 <?php
+use Models\Cars_model;
 
-use Core\App;
-
-$db=App::container()->resolve(\Core\Database::class);
-
+$car =new Cars_model();
 
 
-$cars = $db->query('SELECT * FROM cars',[])->getAll();
+
+$cars = $car->get_all_cars();
 
 
 

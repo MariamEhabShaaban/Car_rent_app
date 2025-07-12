@@ -3,7 +3,9 @@
 namespace Core\Middleware;
 class Customer{
       public function handle() {
-         if($_SESSION['user']??false){
+        if(!isset($_SESSION['user']) || strtolower($_SESSION['role']) !== 'customer'){
+           
+           
                         header('location:/');
                         exit;
                     }

@@ -2,6 +2,9 @@
 
 use Core\App;
 use Core\validator;
+use Models\Cars_model;
+
+$update_car =new Cars_model();
 
 $db=App::container()->resolve(\Core\Database::class);
 
@@ -22,15 +25,13 @@ if(validator::string($car,1) && validator::string($price,2)){
 
 $status= 'Available';
 
-$store_car = $db->query('UPDATE cars SET model_name = ?, price = ?, `status` = ? WHERE id = ?
-',[$car, $price ,$status,$id]);
-
+$store_car = $update_car->update_car($car, $price ,$status,$id);
  if ($store_car) {
       if(!empty($image)){
         $carId = $id;
         $ext = extension($image);
         upload_image($image, $tmp_name, $carId, $uploadDir);
-        $store_car = $db->query('UPDATE cars SET image_ext =? WHERE id= ?', [$ext, $carId]);
+        $store_car = $update_car->store_image ($ext, $carId);
         }
 
         $_SESSION['update'] = "Updated Successfully";
