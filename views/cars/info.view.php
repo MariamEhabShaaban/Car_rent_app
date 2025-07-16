@@ -33,12 +33,12 @@ require view('partials/nav.php');
 
         <div class="pt-4">
             <?php if ($_SESSION['role']!='owner'):?>
-          <a href="/upload_id?car=<?= $car['id']?>" class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700">
+          <a href="/upload_id?token=<?= $car['token']?>" class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700">
             Rent This Car
           </a>
           <?php else:?>
 
-           <a href="/edit?car=<?= $car['id']?>" class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700">
+           <a href="/edit?token=<?= $car['token']?>" class="bg-gray-600 text-white px-6 py-2 rounded hover:bg-gray-700">
            Edit
           </a>
           <?php endif;?>

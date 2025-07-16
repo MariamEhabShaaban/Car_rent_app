@@ -9,7 +9,7 @@ require view("partials/nav.php");
             </div>
             <nav class="mt-4 space-y-2">
                 <a href="/home" class="block px-4 py-2 hover:bg-gray-700">Dashboard</a>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-700">Rented Cars</a>
+                <a href="/rent_request" class="block px-4 py-2 hover:bg-gray-700">Rent Requests</a>
                
             </nav>
         </aside>
@@ -24,6 +24,7 @@ require view("partials/nav.php");
                         <th class="px-6 py-3 text-left text-sm font-semibold">Car Name</th>
                         <th class="px-6 py-3 text-left text-sm font-semibold">Price/Day</th>
                         <th class="px-6 py-3 text-left text-sm font-semibold">Status</th>
+                       
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
@@ -32,19 +33,18 @@ require view("partials/nav.php");
                             <td class="px-6 py-4 text-gray-800"><?= $car['model_name'] ?></td>
                             <td class="px-6 py-4 text-gray-800"><?= $car['price'] ?> $ </td>
                             <td class="px-6 py-4">
-                                <?php if ($car['status'] === 'Available'): ?>
+                                <?php if ($car['car_status'] === 'Available'): ?>
                                     <div class="flex items-center space-x-4">
                                         <span class="text-green-600 font-medium">Available</span>
 
                                         <form action="/info" method="POST">
-                                            <input type="hidden" value="<?= $car['id'] ?>" name="car">
+                                            <input type="hidden" value="<?= $car['token'] ?>" name="token">
                                             <button class="text-blue-600 hover:underline text-sm">Details</button>
                                         </form>
 
                                         
                                     </div>
-                                <?php else: ?>
-                                    <span class="text-red-600 font-medium">Not Available</span>
+                                
                                 <?php endif; ?>
                             </td>
 

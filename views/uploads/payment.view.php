@@ -10,6 +10,7 @@ require view('partials/nav.php');
   <h2 class="text-2xl font-bold mb-4 text-gray-800">Choose Payment Method</h2>
 
   <form action="/store_pay" method="POST" class="space-y-4">
+     <input type="hidden" name="token" value="<?php echo $token?>">
     <div class="flex items-center space-x-3">
       <input 
         type="radio" 
@@ -46,6 +47,13 @@ require view('partials/nav.php');
     >
       Submit
     </button>
+
+    <?php if (isset($errors['send_email'])): ?>
+                            <p class="text-red-500 text-xs">
+                                <?= $errors['send_email'] ?>
+                            </p>
+                        <?php endif ?>
+
   </form>
 </div>
 

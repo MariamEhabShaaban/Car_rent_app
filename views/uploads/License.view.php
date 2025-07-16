@@ -11,10 +11,10 @@ require view('partials/nav.php');
         <form action="/store_license" method="POST" enctype="multipart/form-data"
             class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md space-y-6 border border-gray-200">
                  
-            <input type="hidden" name="id" value="<?php echo $id?>">
+            <input type="hidden" name="token" value="<?php echo $token?>">
            
             
-            <h2 class="text-2xl font-bold text-center text-gray-700">Upload Driven License</h2>
+            <h2 class="text-2xl font-bold text-center text-gray-700">Upload Driving License</h2>
 
            
             <div>

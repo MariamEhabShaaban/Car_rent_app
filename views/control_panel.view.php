@@ -13,10 +13,11 @@ require view('partials/nav.php') ?>
             <nav class="mt-4 space-y-2">
                 <a href="/control_panel" class="block px-4 py-2 hover:bg-gray-700">Dashboard</a>
                 <a href="/manage" class="block px-4 py-2 hover:bg-gray-700">Manage Cars</a>
-                <a href="/#" class="block px-4 py-2 hover:bg-gray-700">Booking Requests</a>
-                <a href="/#" class="block px-4 py-2 hover:bg-gray-700">Documents Uploads</a>
-                <a href="/#" class="block px-4 py-2 hover:bg-gray-700">Profit Reports</a>
-                <a href="/#" class="block px-4 py-2 hover:bg-gray-700">Customer Ratings</a>
+                <a href="https://mailtrap.io/inboxes/3887333/messages"  rel="noopener noreferrer" class="block px-4 py-2 hover:bg-gray-700 text-white">
+                    Booking Requests
+                </a>
+                <a href="/reports" class="block px-4 py-2 hover:bg-gray-700">Profit Reports</a>
+                <a href="/ratings" class="block px-4 py-2 hover:bg-gray-700">Customer Ratings</a>
             </nav>
         </aside>
 

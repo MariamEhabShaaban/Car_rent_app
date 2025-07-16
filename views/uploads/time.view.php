@@ -10,6 +10,7 @@ require view('partials/nav.php');
         <div class="bg-white rounded-2xl shadow-lg p-6">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Choose the needed Date</h2>
             <form action="/store_time" method="POST">
+                 <input type="hidden" name="token" value="<?php echo $token?>">
                
            
                 <label for="date" class="block text-lg font-medium text-gray-700 mb-2">

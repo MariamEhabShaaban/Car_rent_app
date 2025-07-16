@@ -17,7 +17,7 @@ require view('partials/nav.php');
 
             <form action="/update" method="POST" enctype="multipart/form-data" class="space-y-6">
                 <input type="hidden"  name="_method" value="PUT">
-                <input type="hidden" name="id" value="<?= $car['id']?>">
+                <input type="hidden" name="token" value="<?= $car['token']?>">
                 <!-- Car Name -->
                 <div>
                     <label for="car_name" class="block font-semibold mb-1">Car Name</label>
