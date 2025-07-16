@@ -3,7 +3,8 @@
 use Models\Booking_requests_model;
 use Core\validator;
 
-$request =new Booking_requests_model;
+use Core\App;
+$request = new Booking_requests_model(App::container()->resolve(\Core\Database::class));
 
 
 

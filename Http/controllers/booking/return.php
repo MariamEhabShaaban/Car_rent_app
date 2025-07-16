@@ -1,12 +1,15 @@
 <?php
 use Models\Cars_model;
 use Models\Booking_requests_model;
-$car = new Cars_model;
-$request = new Booking_requests_model;
+use Core\App;
+$db= App::container()->resolve(\Core\Database::class);
+$car = new Cars_model($db);
+
+$request = new Booking_requests_model($db);
 // update car status to available
 $token =$_POST['token'];
 
-$update_car = $car->update_status($token,'Available');
+$update_car = $car->update_car_statusByToken($token,'Available');
 $car_id = $car->get_car($token)['id'];
 
 

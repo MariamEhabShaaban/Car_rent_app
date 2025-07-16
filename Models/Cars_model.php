@@ -1,12 +1,15 @@
 <?php
 
 namespace Models;
-use Core\App;
+
 
 class Cars_model
 {
 
-
+   private $db;
+   public function __construct($db){
+    $this->db=$db;
+   }
 
     //add car
 
@@ -14,19 +17,19 @@ class Cars_model
     {
 
         $token = bin2hex(random_bytes(16));
-        $db = App::container()->resolve(\Core\Database::class);
-        $add = $db->query('INSERT INTO cars (`model_name`,`price`,`status`,`token`) VALUES (?,?,?,?)', [$car, $price, $status,$token]);
+       
+        $add = $this->db->query('INSERT INTO cars (`model_name`,`price`,`status`,`token`) VALUES (?,?,?,?)', [$car, $price, $status,$token]);
 
-        return $db->lastInsertId();;
+        return $this->db->lastInsertId()??false;
 
     }
 
 
     public function store_image($ext, $carId)
     {
-        $db = App::container()->resolve(\Core\Database::class);
-        $store = $db->query('UPDATE cars SET image_ext =? WHERE id= ?', [$ext, $carId]);
-        return $store;
+      
+        $store = $this->db->query('UPDATE cars SET image_ext =? WHERE id= ?', [$ext, $carId]);
+        return $store?true:false;
 
 
     }
@@ -41,9 +44,9 @@ class Cars_model
     public function delete_car($token)
     {
 
-        $db = App::container()->resolve(\Core\Database::class);
-       $delete= $db->query('DELETE FROM cars WHERE token=?', [$token]);
-       return $delete;
+      
+       $delete= $this->db->query('DELETE FROM cars WHERE token=?', [$token]);
+       return $delete?true:false;
 
     }
 
@@ -55,21 +58,21 @@ class Cars_model
     public function update_car($car, $price, $status, $token)
     {
 
-        $db = App::container()->resolve(\Core\Database::class);
+      
 
-        $update = $db->query('UPDATE cars SET model_name = ?, price = ?, `status` = ? WHERE token = ?
+        $update = $this->db->query('UPDATE cars SET model_name = ?, price = ?, `status` = ? WHERE token = ?
 ', [$car, $price, $status, $token]);
-        return $update;
+        return $update?true:false;
 
     }
 
 
-    public function update_carById($id,$status){
-           $db = App::container()->resolve(\Core\Database::class);
+    public function update_car_statusById($id,$status){
+         
 
-        $update = $db->query('UPDATE cars SET  `status` = ? WHERE id = ?
+        $update = $this->db->query('UPDATE cars SET  `status` = ? WHERE id = ?
 ', [ $status, $id]);
-        return $update;
+        return $update?true:false;
 
 
     }
@@ -79,9 +82,9 @@ class Cars_model
 
     public function get_car($token)
     {
-        $db = App::container()->resolve(\Core\Database::class);
+        
 
-        $car = $db->query('SELECT * FROM cars WHERE token= ?',[$token])->find();
+        $car =$this->db->query('SELECT * FROM cars WHERE token= ?',[$token])->find();
         return $car;
 
     }
@@ -90,18 +93,17 @@ class Cars_model
     
     public function get_all_cars()
     {
-        $db = App::container()->resolve(\Core\Database::class);
-        $cars = $db->query('SELECT * FROM cars')->getAll();
+       
+        $cars = $this->db->query('SELECT * FROM cars')->getAll();
         return $cars;
 
     }
 
-    public function update_status($token,$status){
-               $db = App::container()->resolve(\Core\Database::class);
-
-        $update = $db->query('UPDATE cars SET  `status` = ? WHERE token = ?
+    public function update_car_statusByToken($token,$status){
+              
+        $update = $this->db->query('UPDATE cars SET  `status` = ? WHERE token = ?
 ', [ $status, $token]);
-        return $update;
+        return $update?true:false;
 
 
     }

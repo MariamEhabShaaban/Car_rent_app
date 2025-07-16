@@ -1,7 +1,7 @@
 <?php
 use Models\Cars_model;
-
-$car =new Cars_model();
+use Core\App;
+$car =new Cars_model(App::container()->resolve(\Core\Database::class));
 
 
 

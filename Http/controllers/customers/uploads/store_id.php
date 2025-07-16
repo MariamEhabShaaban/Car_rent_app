@@ -3,9 +3,10 @@
 use Models\Booking_requests_model;
 use Models\Cars_model;
 use Core\validator;
-
-$request = new Booking_requests_model;
-$car = new Cars_model;
+use Core\App;
+$db=App::container()->resolve(\Core\Database::class);
+$request = new Booking_requests_model($db);
+$car = new Cars_model($db);
 
 
 $errors = [];

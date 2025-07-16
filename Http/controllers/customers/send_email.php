@@ -1,10 +1,10 @@
 <?php
 
-
+use Core\App;
 use Core\Mail;
 use Models\Booking_requests_model;
 
-$book_request = new Booking_requests_model();
+$book_request = new Booking_requests_model(App::container()->resolve(\Core\Database::class));
 $errors = [];
 $mail = new Mail();
 $token =$_GET['token'];

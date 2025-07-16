@@ -1,13 +1,21 @@
 <?php
 // bring all cars
-
 use Core\App;
+use Models\Cars_model;
+use Models\Booking_requests_model;
+$db= App::container()->resolve(\Core\Database::class);
+$car = new Cars_model($db);
+$request= new Booking_requests_model($db);
 
-$db=App::container()->resolve(\Core\Database::class);
+$cars = $car->get_all_cars();
+$pending = $request->get_pending();
 
-$cars = $db->query('SELECT * FROM cars')->getAll();
+if($pending){
+   $pending =$pending['count'];
+}
 
 
  require view("control_panel.view.php",[
-    'cars'=>$cars
+    'cars'=>$cars,
+    'pending'=>$pending
  ]);

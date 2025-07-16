@@ -5,8 +5,10 @@
 use Models\Booking_requests_model;
 
 use Models\Cars_model;
-$request = new Booking_requests_model;
-$car = new Cars_model;
+use Core\App;
+$db = App::container()->resolve(\Core\Database::class);
+$request = new Booking_requests_model($db);
+$car = new Cars_model($db);
 
 $token = $_GET['token'] ?? null;
 
@@ -39,7 +41,7 @@ if ($_SERVER['PATH_INFO'] === '/accept') {
     $update_status = $request->update_status($token, 'accepted');
 // update car status to not available
 
-    $update_car = $car->update_carById($booking['car_id'],'Not_available');
+    $update_car = $car->update_car_statusById($booking['car_id'],'Not_available');
     if($update_status && $update_car){
            
         redirect('/control_panel');

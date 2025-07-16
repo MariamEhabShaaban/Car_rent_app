@@ -2,7 +2,7 @@
 
 //login 
 use Core\Authenticator;
-use Core\validator;
+use Core\App;
 
 // validation 
 
@@ -13,7 +13,7 @@ $password = $_POST['password'];
 
 $errors = [];
 
-$auth = new Authenticator();
+$auth = new Authenticator(App::container()->resolve(\core\Database::class));
 
 $login = $auth->attemptLogin($email, $password);
 

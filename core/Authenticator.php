@@ -6,7 +6,11 @@ use Core\validator;
 use Models\Users_model;
 
 class Authenticator
+
+
 {
+
+    private $db;
     protected $errors = [];
 
     private $email;
@@ -17,7 +21,9 @@ class Authenticator
     private $role = 'customer';
 
     protected $reg = true;
-
+  public function __construct($db){
+    $this->db=$db;
+  }
     public function validate($email, $password)
     {
         $this->email = $email;
@@ -62,7 +68,7 @@ class Authenticator
     public function attemptLogin($email, $password): bool
     {
        $db = App::container()->resolve(\Core\Database::class);
-            $users = new Users_model;
+            $users = new Users_model($this->db);
 
         $user = $users->get_user_byEmail($email);
 
@@ -106,7 +112,7 @@ class Authenticator
     public function register()
     {  
           $token = bin2hex(random_bytes(16));
-          $add_user = new Users_model();
+          $add_user = new Users_model($this->db);
           $this->reg = $add_user->add_user($this->email,$this->password,$this->role,$token);
         
            if($this->reg)
@@ -118,7 +124,7 @@ class Authenticator
     public function unique($email)
     {
         $db = App::container()->resolve(\Core\Database::class);
-        $users = new Users_model;
+        $users = new Users_model($this->db);
         $duplicate = $users->get_user_byEmail($email);
         return !$duplicate;
     }
