@@ -10,7 +10,7 @@ $db=App::container()->resolve(\Core\Database::class);
 
 $_SESSION['update']="Failed To Update";
 
-$id= $_POST['id'];
+$token= $_POST['token'];
 
 $car= $_POST['car'];
 
@@ -25,10 +25,11 @@ if(validator::string($car,1) && validator::string($price,2)){
 
 $status= 'Available';
 
-$store_car = $update_car->update_car($car, $price ,$status,$id);
+$store_car = $update_car->update_car($car, $price ,$status,$token);
  if ($store_car) {
       if(!empty($image)){
-        $carId = $id;
+
+        $carId = $update_car->get_car($token)['id'];
         $ext = extension($image);
         upload_image($image, $tmp_name, $carId, $uploadDir);
         $store_car = $update_car->store_image ($ext, $carId);

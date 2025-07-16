@@ -6,14 +6,16 @@ use Core\App;
 class Cars_model
 {
 
+
+
     //add car
 
     public function add_car($car, $price, $status)
     {
 
-
+        $token = bin2hex(random_bytes(16));
         $db = App::container()->resolve(\Core\Database::class);
-        $add = $db->query('INSERT INTO cars (`model_name`,`price`,`status`) VALUES (?,?,?)', [$car, $price, $status]);
+        $add = $db->query('INSERT INTO cars (`model_name`,`price`,`status`,`token`) VALUES (?,?,?,?)', [$car, $price, $status,$token]);
 
         return $db->lastInsertId();;
 
@@ -32,14 +34,15 @@ class Cars_model
 
 
 
+
     //delete car
 
 
-    public function delete_car($id)
+    public function delete_car($token)
     {
 
         $db = App::container()->resolve(\Core\Database::class);
-       $delete= $db->query('DELETE FROM cars WHERE id=?', [$id]);
+       $delete= $db->query('DELETE FROM cars WHERE token=?', [$token]);
        return $delete;
 
     }
@@ -49,25 +52,36 @@ class Cars_model
     //update
 
 
-    public function update_car($car, $price, $status, $id)
+    public function update_car($car, $price, $status, $token)
     {
 
         $db = App::container()->resolve(\Core\Database::class);
 
-        $update = $db->query('UPDATE cars SET model_name = ?, price = ?, `status` = ? WHERE id = ?
-', [$car, $price, $status, $id]);
+        $update = $db->query('UPDATE cars SET model_name = ?, price = ?, `status` = ? WHERE token = ?
+', [$car, $price, $status, $token]);
         return $update;
+
+    }
+
+
+    public function update_carById($id,$status){
+           $db = App::container()->resolve(\Core\Database::class);
+
+        $update = $db->query('UPDATE cars SET  `status` = ? WHERE id = ?
+', [ $status, $id]);
+        return $update;
+
 
     }
 
 
     //get car
 
-    public function get_car($id)
+    public function get_car($token)
     {
         $db = App::container()->resolve(\Core\Database::class);
 
-        $car = $db->query('SELECT * FROM cars WHERE id= ?',[$id])->find();
+        $car = $db->query('SELECT * FROM cars WHERE token= ?',[$token])->find();
         return $car;
 
     }
@@ -79,6 +93,16 @@ class Cars_model
         $db = App::container()->resolve(\Core\Database::class);
         $cars = $db->query('SELECT * FROM cars')->getAll();
         return $cars;
+
+    }
+
+    public function update_status($token,$status){
+               $db = App::container()->resolve(\Core\Database::class);
+
+        $update = $db->query('UPDATE cars SET  `status` = ? WHERE token = ?
+', [ $status, $token]);
+        return $update;
+
 
     }
 

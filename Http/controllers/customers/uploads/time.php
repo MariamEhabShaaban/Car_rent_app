@@ -1,10 +1,9 @@
 <?php
 
 
- $id= $_GET['car'];
+ 
+$token=$_GET['token'];
 
- require view("uploads/time.view.php",
- [
-    'id'=>$id
- ]
-);
+ require view("uploads/time.view.php",[
+   'token'=>$token
+ ]);

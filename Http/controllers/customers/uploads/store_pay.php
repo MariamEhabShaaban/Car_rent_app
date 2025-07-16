@@ -6,7 +6,7 @@ use Core\validator;
 use Models\Booking_requests_model;
 $request = new Booking_requests_model;
 $errors = [];
-
+$token = $_POST['token'];
 
 $pay_method = $_POST['payment_method'];
 
@@ -19,8 +19,9 @@ if (validator::string($pay_method, 8)) {
       $store_pay = $request->payment_method($pay_method,$Id);
 
     if ($store_pay) {
-        // go to home 
-        redirect('/home');
+      
+         redirect("/send_email?token=$token");
+
     }
 
 
@@ -31,8 +32,6 @@ if (validator::string($pay_method, 8)) {
     ]);
     exit;
 }
-
- redirect('/send_email');
 
 // send an email to owner to confirm and this link will deleted after 5 hours
 

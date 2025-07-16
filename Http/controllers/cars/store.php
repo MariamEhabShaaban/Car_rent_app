@@ -32,7 +32,7 @@ if (validator::string($car, 1) && validator::string($price, 2)) {
         upload_image($image, $tmp_name, $carId, $uploadDir);
         $store_car = $add_car->store_image($ext,$carId);
         if($store_car)
-          $_SESSION['add'] = "Added Successfully";
+        $_SESSION['add'] = "Added Successfully";
 
     }
 }

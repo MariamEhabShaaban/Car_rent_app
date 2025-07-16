@@ -1,16 +1,18 @@
 <?php
 
 use Models\Booking_requests_model;
+use Models\Cars_model;
 use Core\validator;
 
 $request = new Booking_requests_model;
+$car = new Cars_model;
 
 
 $errors = [];
 
 
-
-$car_id = $_POST['id'];
+$token = '';
+$car_token = $_POST['token'];
 
 $id_front = $_FILES['id_front']['name'];
 
@@ -27,9 +29,12 @@ if (validator::string($id_front, 1) && validator::string($id_back, 1)) {
 
     $status = 'pending';
     $customer_id = $_SESSION['id'];
-    $store_id = $request->add_request($customer_id,$car_id,$status);
-    if ($store_id) {
-        $Id=$_SESSION['booking_id']= $store_id;
+    $car_id = $car->get_car($car_token)['id'];
+    $store_req = $request->add_request($customer_id,$car_id,$status);
+    if ($store_req) {
+        $Id=$_SESSION['booking_id']= $store_req['id'];
+        $token = $store_req['token'];
+
 
         $ext_front = extension($id_front);
 
@@ -50,7 +55,7 @@ if (validator::string($id_front, 1) && validator::string($id_back, 1)) {
     exit;
 }
 
-redirect("/upload_passport?car=$car_id");
+redirect("/upload_passport?token=$token");
 
 
 

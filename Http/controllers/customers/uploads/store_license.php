@@ -10,8 +10,7 @@ $request =new Booking_requests_model;
 $errors=[];
 
 
-
-$car_id = $_POST['id'];
+$token=$_POST['token'];
 
 $license = $_FILES['license']['name'];
 
@@ -41,7 +40,7 @@ else{
     exit;
 }
 
-redirect("/time?car=$car_id");
+redirect("/time?token=$token");
 
 
 

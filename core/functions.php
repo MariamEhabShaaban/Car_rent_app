@@ -3,6 +3,7 @@
 use Core\Response;
 use Core\Router;
 use Core\App;
+//define ('BASE_PATH',' https://a58a472d6fec.ngrok-free.app');
 function dd($data)
 {
     echo '<pre>';
@@ -44,7 +45,7 @@ function view($path, $attr = [])
 function abort($code = 404)
 {
     http_response_code($code);
-    require base_path("controllers/{$code}.php");
+    require base_path("Http/controllers/{$code}.php");
     die();
 }
 
@@ -115,5 +116,9 @@ function validate_date($date) {
     $current_date = date('Y-m-d');
 
     return $input_date > $current_date;
+}
+
+function check_expire($time){
+    return $time <time();
 }
 

@@ -29,7 +29,7 @@ class Database{
     }
 
     public function find(){
-        return $this->st->fetch();
+        return $this->st->fetch(PDO::FETCH_ASSOC);
     }
 
     public function findORfail(){

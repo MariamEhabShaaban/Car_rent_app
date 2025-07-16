@@ -79,6 +79,7 @@ class Authenticator
         }
         $this->role = $user['role'];
         $_SESSION['id']=$user['id'];
+       
 
         return true;
     }
@@ -103,10 +104,10 @@ class Authenticator
 
 
     public function register()
-    {
-
+    {  
+          $token = bin2hex(random_bytes(16));
           $add_user = new Users_model();
-          $this->reg = $add_user->add_user($this->email,$this->password,$this->role);
+          $this->reg = $add_user->add_user($this->email,$this->password,$this->role,$token);
         
            if($this->reg)
                  $_SESSION['register'] = 'Registed Successfully';

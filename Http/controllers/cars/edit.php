@@ -5,9 +5,9 @@ $car_ =new Cars_model;
 
 
 
-$id= $_GET['car'];
+$token= $_GET['token'];
 
-$car = $car_->get_car($id);
+$car = $car_->get_car($token);
 
 if(!empty($car)){
     

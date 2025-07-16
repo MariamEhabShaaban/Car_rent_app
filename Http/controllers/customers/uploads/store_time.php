@@ -9,7 +9,7 @@ $request = new Booking_requests_model;
 
 $errors=[];
 
-
+$token = $_POST['token'];
 $time = $_POST['date'];
 
 
@@ -34,7 +34,7 @@ else{
     exit;
 }
 
-redirect("/payment_method");
+redirect("/payment_method?token=$token");
 
 
 

@@ -6,11 +6,11 @@ use Core\App;
 use Core\validator;
 class Users_model{
 
-    public function add_user($email ,$password,$role){
+    public function add_user($email ,$password,$role,$token){
 
 
                $db = App::container()->resolve(\Core\Database::class);
-               $res=$db->query('INSERT INTO users (`email`, `password` , `role`) VALUES (?,?,?)',[$email,$password,$role]);
+               $res=$db->query('INSERT INTO users (`email`, `password` , `role`,`token`) VALUES (?,?,?,?)',[$email,$password,$role,$token]);
                return $res;
     }
 
@@ -23,6 +23,8 @@ class Users_model{
          return $user;
 
     }
+
+   
 
 
 

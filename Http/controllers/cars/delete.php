@@ -4,13 +4,14 @@ use Models\Cars_model;
 
 $cars =new Cars_model;
 
-$id = $_POST['car'];
+$token = $_POST['token'];
 
 $_SESSION['delete'] = 'Failed To Delete';
-$car = $cars->get_car($id);
+$car = $cars->get_car($token);
 $ext = $car['image_ext'];
+$id= $car['id'];
+$delete = $cars->delete_car($token);
 
-$delete = $cars->delete_car($id);
 
 if ($delete) {
 

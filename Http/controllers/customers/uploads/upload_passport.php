@@ -1,10 +1,9 @@
 <?php
 
+ $token= $_GET['token'];
 
- $id= $_GET['car'];
 
- require view("uploads/passport.view.php",
- [
-    'id'=>$id
- ]
-);
+ require view("uploads/passport.view.php",[
+   'token'=>$token
+ ]);
+

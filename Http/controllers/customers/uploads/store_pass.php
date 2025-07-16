@@ -8,7 +8,8 @@ $errors=[];
 
 
 
-$car_id = $_POST['id'];
+
+$token=$_POST['token'];
 
 $passport = $_FILES['passport']['name'];
 
@@ -39,7 +40,7 @@ else{
     exit;
 }
 
-redirect("/upload_license?car=$car_id");
+redirect("/upload_license?token=$token");
 
 
 
