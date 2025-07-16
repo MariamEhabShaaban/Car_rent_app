@@ -16,7 +16,6 @@ require view('partials/nav.php') ?>
                 <a href="https://mailtrap.io/inboxes/3887333/messages"  rel="noopener noreferrer" class="block px-4 py-2 hover:bg-gray-700 text-white">
                     Booking Requests
                 </a>
-                <a href="/reports" class="block px-4 py-2 hover:bg-gray-700">Profit Reports</a>
                 <a href="/ratings" class="block px-4 py-2 hover:bg-gray-700">Customer Ratings</a>
             </nav>
         </aside>
@@ -34,13 +33,10 @@ require view('partials/nav.php') ?>
 
                 <div class="bg-white p-4 rounded-lg shadow text-center max-w-5xl w-full">
                     <h2 class="text-gray-700 font-semibold">Pending Bookings</h2>
-                    <p class="text-2xl font-bold">5</p>
+                    <p class="text-2xl font-bold"><?=$pending ?></p>
                 </div>
 
-                <div class="bg-white p-4 rounded-lg shadow text-center max-w-5xl w-full">
-                    <h2 class="text-gray-700 font-semibold">Monthly Profit</h2>
-                    <p class="text-2xl font-bold">$4,250</p>
-                </div>
+              
             </div>
 
 

@@ -1,9 +1,9 @@
 <?php
-
+use Core\App;
 
 use Core\validator;
 use Models\Cars_model;
-$add_car= new Cars_model();
+$add_car=new Cars_model(App::container()->resolve(\Core\Database::class));
 
 
 

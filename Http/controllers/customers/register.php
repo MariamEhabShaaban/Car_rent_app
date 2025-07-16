@@ -1,7 +1,7 @@
 <?php
 
 use Core\Authenticator;
-use Core\validator;
+use Core\App;
 
 
 $errors = [];
@@ -13,7 +13,7 @@ $password = $_POST['password'];
 
 $confirm_pass = $_POST['confirm_password'];
 
-$auth = new Authenticator();
+$auth = new Authenticator(App::container()->resolve(\Core\Database::class));
 
 $auth->validate($email, $password);
 

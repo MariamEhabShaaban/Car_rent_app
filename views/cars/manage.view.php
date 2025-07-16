@@ -44,7 +44,9 @@ require view('partials/nav.php');
   <?php unset($_SESSION['add'], $_SESSION['delete'], $_SESSION['update']); ?>
 
   <!-- Available Cars -->
+  
   <div>
+     <?php if($availableCars):?>
     <h3 class="text-lg text-center mb-5 font-semibold text-green-700 mb-2">Available Cars</h3>
     <table class="w-full table-auto mb-8">
       <thead>
@@ -77,10 +79,14 @@ require view('partials/nav.php');
         <?php endforeach; ?>
       </tbody>
     </table>
+      <?php endif?>
   </div>
+
+ 
 
   <!-- Not Available Cars -->
   <div>
+     <?php if($unavailableCars):?>
     <h3 class="text-lg text-center mb-5 font-semibold text-red-700 mb-2">Not Available Cars</h3>
     <table class="w-full table-auto">
       <thead>
@@ -113,7 +119,9 @@ require view('partials/nav.php');
       </tbody>
     </table>
   </div>
+  <?php endif?>
 
 </div>
+
 
 <?php require view('partials/footer.php'); ?>

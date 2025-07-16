@@ -1,9 +1,9 @@
 <?php
-
+use Core\App;
 // validate date empty and in the future
 use Core\validator;
 use Models\Booking_requests_model;
-$request = new Booking_requests_model;
+$request = new Booking_requests_model(App::container()->resolve(\Core\Database::class));
 
 ;
 

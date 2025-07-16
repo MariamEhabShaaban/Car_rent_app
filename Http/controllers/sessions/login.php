@@ -13,7 +13,7 @@ $password = $_POST['password'];
 
 $errors = [];
 
-$auth = new Authenticator(App::container()->resolve(\core\Database::class));
+$auth = new Authenticator(App::container()->resolve(\Core\Database::class));
 
 $login = $auth->attemptLogin($email, $password);
 

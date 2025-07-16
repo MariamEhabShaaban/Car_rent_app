@@ -1,7 +1,6 @@
 <?php
 
 namespace Core;
-use Core\App;
 use Core\validator;
 use Models\Users_model;
 
@@ -67,7 +66,7 @@ class Authenticator
 
     public function attemptLogin($email, $password): bool
     {
-       $db = App::container()->resolve(\Core\Database::class);
+       
             $users = new Users_model($this->db);
 
         $user = $users->get_user_byEmail($email);
@@ -123,7 +122,7 @@ class Authenticator
 
     public function unique($email)
     {
-        $db = App::container()->resolve(\Core\Database::class);
+        
         $users = new Users_model($this->db);
         $duplicate = $users->get_user_byEmail($email);
         return !$duplicate;

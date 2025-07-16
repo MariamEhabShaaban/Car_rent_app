@@ -1,8 +1,8 @@
 <?php
 
 use Core\Authenticator;
-
-$auth = new Authenticator;
+use Core\App;
+$auth = new Authenticator(App::container()->resolve(\Core\Database::class));
 
 $auth->logout();
 

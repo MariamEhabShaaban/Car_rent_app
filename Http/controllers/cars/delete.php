@@ -1,8 +1,8 @@
 <?php
-
+use Core\App;
 use Models\Cars_model;
 
-$cars =new Cars_model;
+$cars =new Cars_model(App::container()->resolve(\Core\Database::class));
 
 $token = $_POST['token'];
 

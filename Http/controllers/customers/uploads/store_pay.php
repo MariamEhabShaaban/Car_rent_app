@@ -1,10 +1,10 @@
 <?php
 
 // store payment method
-
+use Core\App;
 use Core\validator;
 use Models\Booking_requests_model;
-$request = new Booking_requests_model;
+$request = new Booking_requests_model(App::container()->resolve(\Core\Database::class));
 $errors = [];
 $token = $_POST['token'];
 

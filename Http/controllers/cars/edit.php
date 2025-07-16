@@ -1,13 +1,14 @@
 <?php
 
 use Models\Cars_model;
-$car_ =new Cars_model;
+use Core\App;
 
 
+$cars =new Cars_model(App::container()->resolve(\Core\Database::class));
 
 $token= $_GET['token'];
 
-$car = $car_->get_car($token);
+$car = $cars->get_car($token);
 
 if(!empty($car)){
     
