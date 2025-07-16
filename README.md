@@ -26,10 +26,10 @@ A complete vehicle rental solution with admin dashboard and customer portal buil
 - Composer
 
 ### 🛡Security Features
--🔑 Password hashing with PHP password_hash()
--🚫 SQL injection prevention with prepared statements
--🔐 Session management with strict validation
--📁 Secure file upload handling
+- 🔑 Password hashing with PHP password_hash()
+- 🚫 SQL injection prevention with prepared statements
+- 🔐 Session management with strict validation
+- 📁 Secure file upload handling
 
 ### Setup Steps
 1. Clone repository:
