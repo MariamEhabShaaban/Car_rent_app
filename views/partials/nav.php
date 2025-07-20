@@ -2,7 +2,7 @@
   <div class="w-full px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo -->
-      <a href="/" class="text-2xl font-bold text-gray-800">CarRent</a>
+      <span class="text-2xl font-bold text-gray-800">CarRent</span>
 
       <!-- Desktop Navigation -->
       <div class="hidden md:flex space-x-6">
