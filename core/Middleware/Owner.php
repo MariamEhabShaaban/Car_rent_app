@@ -6,7 +6,7 @@ class Owner{
         if(!isset($_SESSION['user']) || strtolower($_SESSION['role']) !== 'owner'){
            
            
-                        header('location:/');
+                          abort('403');
                         exit;
                     }
     }

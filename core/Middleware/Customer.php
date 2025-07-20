@@ -6,7 +6,7 @@ class Customer{
         if(!isset($_SESSION['user']) || strtolower($_SESSION['role']) !== 'customer'){
            
            
-                        header('location:/');
+                         abort('403');
                         exit;
                     }
     }
